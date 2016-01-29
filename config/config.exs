@@ -9,8 +9,8 @@ use Mix.Config
 config :kukunochi, Kukunochi.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
-  secret_key_base: "ACzpYyoIczofQaU0EbJOl28kHjvgk9KPfdBZXb2ODAtTJv0vfRhwD5iY0YrFT/S6",
-  render_errors: [accepts: ~w(json)],
+  secret_key_base: "ixlQ0kUnwFMV9ExQWZ6Llq2OMJWxggm32FOfsiA5BxOSXiODfXgYFcg+JNeBIXKU",
+  render_errors: [accepts: ~w(html json)],
   pubsub: [name: Kukunochi.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
