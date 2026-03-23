@@ -1,0 +1,51 @@
+project:
+  name: kukunochi
+  package_manager: pnpm
+  workspace_style: monorepo
+
+tech_stack:
+  backend:
+    runtime: nodejs
+    framework: fastify
+    architecture: moderate-ddd
+    database_access: kysely
+    auth: oauth-google-first
+  frontend:
+    framework: react
+    bundler: vite
+    structure: feature-based
+    server_state: tanstack-query
+    ui_state: zustand
+    form: react-hook-form
+  packages:
+    contracts: zod
+
+architecture:
+  backend_layers:
+    - presentation
+    - application
+    - domain
+    - infrastructure
+  frontend_layers:
+    - app
+    - pages
+    - features
+    - entities
+    - shared
+  contracts_source_of_truth: packages/contracts
+
+forbidden:
+  - Prisma を導入しない
+  - packages から apps へ依存しない
+  - フロントエンドにドメインロジックを置かない
+  - feature 固有コードを shared に置かない
+  - aggregate を前提に設計しない
+  - domain event を前提に設計しない
+
+basic_commands:
+  install: pnpm install
+  lint: pnpm lint
+  test: pnpm test
+  dev:web: pnpm --filter web dev
+  dev:api: pnpm --filter api dev
+  typecheck: pnpm typecheck
