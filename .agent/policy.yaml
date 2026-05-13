@@ -6,19 +6,28 @@ project:
 tech_stack:
   backend:
     runtime: nodejs
-    framework: fastify
+    framework: hono
     architecture: moderate-ddd
+    database: postgresql-pgvector
     database_access: kysely
-    auth: oauth-google-first
+    auth: later
   frontend:
     framework: react
     bundler: vite
     structure: feature-based
-    server_state: tanstack-query
-    ui_state: zustand
-    form: react-hook-form
+    server_state: tanstack-query-later
+    ui_state: zustand-later
+    form: react-hook-form-later
   packages:
     contracts: zod
+
+runtime_policy:
+  development:
+    api_process: hono
+    web_process: vite
+  production:
+    process: hono
+    static_frontend: apps/web/dist
 
 architecture:
   backend_layers:
@@ -34,6 +43,13 @@ architecture:
     - shared
   contracts_source_of_truth: packages/contracts
 
+mvp_priority:
+  - event registration
+  - event timeline list
+  - event detail
+  - event version
+  - source attachment
+
 forbidden:
   - Prisma を導入しない
   - packages から apps へ依存しない
@@ -41,11 +57,15 @@ forbidden:
   - feature 固有コードを shared に置かない
   - aggregate を前提に設計しない
   - domain event を前提に設計しない
+  - Next.js を前提にしない
+  - production で Web と API を必ず別プロセスにする前提を置かない
 
 basic_commands:
   install: pnpm install
-  lint: pnpm lint
-  test: pnpm test
+  dev: pnpm dev
   dev:web: pnpm --filter web dev
   dev:api: pnpm --filter api dev
+  build: pnpm build
+  start: pnpm --filter api start
+  lint: pnpm lint
   typecheck: pnpm typecheck
